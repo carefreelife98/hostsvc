@@ -1,6 +1,6 @@
 name: Host Service CI
 
-# Event 발생시 아래 실행
+# Event(.js push하면) 발생시 아래 실행
 on:
   push:
     branches: [ "main" ]
