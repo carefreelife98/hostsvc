@@ -1,0 +1,11 @@
+name: Host Service CI
+
+# Event 발생시 아래 실행
+on:
+  push:
+    branches: [ "main" ]
+    paths: ["*.js"]
+
+jobs:
+  buildImage:
+    runs-on: ubuntu-latest # 명시된 OS를 가진 Container를 하나 띄운다.
