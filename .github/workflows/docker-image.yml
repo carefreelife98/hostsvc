@@ -9,3 +9,20 @@ on:
 jobs:
   buildImage:
     runs-on: ubuntu-latest # 명시된 OS를 가진 Container를 하나 띄운다.
+    steps: # 어떤 일을 할 것인지
+    # csm4903/node-app 에 ubuntu OS 기반으로 띄워진 컨테이너에 받아온다(?)
+    - name:  1. Checkout
+      uses: actions/checkout@v3
+
+    - name: 2. Login to Dockerhub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        passsword: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: 3. Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        push: true # 도커 빌드 후 이미지 레지스트리에 자동 추가
+        tags: csm4903/hostservice:${{ github.sha }} # 해당 날짜, 시간 등의 정보를 sha 값으로 변환하여 버젼 생성
