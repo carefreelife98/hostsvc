@@ -28,6 +28,7 @@ jobs:
         tags: csm4903/hostservice:${{ github.sha }} # 해당 날짜, 시간 등의 정보를 sha 값으로 변환하여 버젼 생성
   updateYaml:
     runs-on: ubuntu-latest
+    needs: buildImage
     steps:
       - name: 1. Checkout
         uses: actions/checkout@v3
