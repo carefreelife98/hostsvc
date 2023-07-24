@@ -33,7 +33,7 @@ jobs:
       - name: 1. Checkout
         uses: actions/checkout@v3
         with: 
-          repository: 'csm4903/hostsvc-cd'
+          repository: 'carefreelife98/hostsvc-cd'
           token: ${{ secrets.GIT_TOKEN }}
       - name: 2. Change Docker Tag
         run: |
