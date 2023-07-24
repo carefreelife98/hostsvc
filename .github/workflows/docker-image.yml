@@ -26,3 +26,18 @@ jobs:
       with:
         push: true # 도커 빌드 후 이미지 레지스트리에 자동 추가
         tags: csm4903/hostservice:${{ github.sha }} # 해당 날짜, 시간 등의 정보를 sha 값으로 변환하여 버젼 생성
+  updateYaml:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout
+        uses: actions/checkout@v3
+        with: 
+          repository: 'csm4903/hostsvc-cd'
+          token: ${{ secrets.GIT_TOKEN }}
+      - name: 2. Change Docker Tag
+        run: |
+          sed “s/image: csm4903\/node-app:.*/images: csm4903\/node-app:${{ github.sha }}/g”
+          git config --global user.email "csm12180318@gmail.com"
+          git config --global user.name "carefreelife98"
+          git commit -am "triggered by github action"
+          git push origin main
